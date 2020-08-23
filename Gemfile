@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.0'
 
 gem 'rails', '~> 6.0.0'
+gem 'rails_event_store'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'api-pagination'
@@ -19,6 +20,7 @@ gem 'rspec_api_documentation'
 gem 'sidekiq'
 gem 'xlog'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'kaminari'
 
 # AMQP
 gem 'bunny', '~> 2.9', '>= 2.9.2'

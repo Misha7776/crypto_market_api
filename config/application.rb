@@ -23,6 +23,7 @@ Bundler.require(*Rails.groups)
 
 module CryptoMarketApi
   class Application < Rails::Application
+    config.paths.add 'lib', eager_load: true
     config.paths.add 'data', eager_load: true
     config.paths.add 'data/concerns', eager_load: true
     config.paths.add 'business', eager_load: true
@@ -49,5 +50,11 @@ module CryptoMarketApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.event_store = RailsEventStore::Client.new
+
+    AggregateRoot.configure do |config|
+      config.default_event_store = Rails.application.config.event_store
+    end
   end
 end
