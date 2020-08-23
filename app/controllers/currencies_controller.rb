@@ -14,7 +14,7 @@ class CurrenciesController < ApplicationController
   end
 
   def update
-    execute(Commands::Currencies::UpdateCurrency.new(currency_params.merge!(id: @currency.id)))
+    execute(Commands::Currencies::UpdateCurrency.new(Mappers::CurrencyMapper.call(params)))
   end
 
   def destroy
