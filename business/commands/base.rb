@@ -9,7 +9,7 @@ module Commands
     end
 
     def validate!
-      raise ValidationError, errors unless valid?
+      raise ValidationError, errors.full_messages, caller unless valid?
     end
 
     def persisted?

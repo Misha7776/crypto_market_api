@@ -14,7 +14,7 @@ module Serialization
   end
 
   def render_json(message = {}, status = :ok)
-    render json: message.merge!(success: true), status: status
+    render json: message, status: status
   end
 
   def serialize_collection(collection, options = {})

@@ -18,6 +18,7 @@ require "action_cable/engine"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 require 'sprockets/railtie'
+require 'aggregate_root'
 
 Bundler.require(*Rails.groups)
 
@@ -50,7 +51,6 @@ module CryptoMarketApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-
     config.event_store = RailsEventStore::Client.new
 
     AggregateRoot.configure do |config|

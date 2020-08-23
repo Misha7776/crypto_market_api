@@ -1,27 +1,24 @@
 class CurrenciesController < ApplicationController
   before_action :set_currency, only: [:show, :update, :destroy]
 
-  include Commands::Execute
-  include DeletedEntitiesHelper
-
   def index
-    Currency.all.page(params[:page])
+    collection_response(Currency.all.page(params[:page]))
   end
 
   def show
-    read_stream("Domain::Currency$#{@currency.uid}")
+    render_json read_stream("Domain::Currency$#{@currency.id}")
   end
 
   def create
-    execute(Commands::Currencies::CreateEntity.new(currency_params))
+    execute(Commands::Currencies::CreateCurrency.new(currency_params))
   end
 
   def update
-    execute(Commands::Currencies::EditEntity.new(entity_params.merge!(id: @entity.id)))
+    execute(Commands::Currencies::UpdateCurrency.new(currency_params.merge!(id: @currency.id)))
   end
 
   def destroy
-    execute(Commands::Currencies::DeleteEntity.new(id: @currency.id))
+    execute(Commands::Currencies::DeleteCurrency.new(id: @currency.id))
   end
 
   private
@@ -32,9 +29,5 @@ class CurrenciesController < ApplicationController
 
   def currency_params
     params.require(:currency).permit(:name, :symbol)
-  end
-
-  def error_messages(error)
-    error&.message
   end
 end

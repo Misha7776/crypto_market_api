@@ -1,6 +1,6 @@
 module Denormalizers
-  module Currency
-    class EntityCreated
+  module Currencies
+    class CurrencyCreated
       def call(event)
         ::Currency.create!(event.data)
       end

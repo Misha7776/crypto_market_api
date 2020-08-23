@@ -9,15 +9,15 @@ module Domain
     end
 
     def create(data)
-      apply Events::EntityCreated.new(data: data)
+      apply Events::CurrencyCreated.new(data: data)
     end
 
     def update(data)
-      apply Events::EntityEdited.new(data: data)
+      apply Events::CurrencyUpdated.new(data: data)
     end
 
     def delete(id)
-      apply Events::EntityDeleted.new(data: { id: id })
+      apply Events::CurrencyDeleted.new(data: { id: id })
     end
 
     private

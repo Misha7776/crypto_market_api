@@ -1,6 +1,6 @@
 module Denormalizers
-  module Currency
-    class EntityDeleted
+  module Currencies
+    class CurrencyDeleted
       def call(event)
         entity = ::Currency.find_by(id: event.data[:id])
         entity.destroy if entity

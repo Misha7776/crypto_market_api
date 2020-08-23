@@ -1,5 +1,5 @@
 module Repositories
-  class Currency
+  class CurrencyRepo
     def initialize(event_store = Rails.configuration.event_store)
       @repository = AggregateRoot::Repository.new(event_store)
     end

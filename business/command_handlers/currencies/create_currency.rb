@@ -1,6 +1,6 @@
 module CommandHandlers
   module Currencies
-    class UpdateCurrency
+    class CreateCurrency
       def call(command)
         entity_data = {
           name: command.name,
@@ -13,8 +13,8 @@ module CommandHandlers
           traded_at: command.traded_at
         }.reject{ |_, v| v.nil? }
 
-        EntityRepository.new.with_entity(command.aggregate_uid) do |entity|
-          entity.edit(entity_data)
+        Repositories::CurrencyRepo.new.with_entity(command.id) do |entity|
+          entity.create(entity_data)
         end
       end
     end

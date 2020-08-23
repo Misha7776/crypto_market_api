@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include Serialization
+  include Commands::Execute
 
   def read_stream(stream_name)
     Rails
