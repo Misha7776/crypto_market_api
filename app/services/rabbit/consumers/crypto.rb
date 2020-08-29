@@ -8,9 +8,7 @@ module Rabbit
       def work(msg)
         Sneakers.logger.info("Raw data: #{msg}")
         message = JSON.parse(msg)
-        params = Mappers::CurrencyMapper.call(message)
-        Xlog.info("Parsed params: #{params}")
-        execute(::Commands::Currencies::UpdateCurrency.new(params)) if params.present?
+        Mappers::CurrencyMapper.call(message)
 
         ack!
       end
