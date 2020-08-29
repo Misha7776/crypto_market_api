@@ -1,89 +1,56 @@
-# Dream project [example readme]
+# Crypto Maarket API
 
 ## Project scope
 
-Ultimate solution for tours/hotels management.  
+Solution for monitoring the crypto currencies market.  
 
-- Create, edit, import products
-- Order product
-- SafeCharge payment system
-- Configurable reporting and analytics
-- Suppliers CRM
+- Real-time updates of crypto currencies
+- Available history of all events that happened with a currency
 
 ## Runtime environment
 
 The infrasturcture of Dream project consists of the following services:
 
-- Dream project application
+- Socket client written in Ruby
+- RabbitMQ broker for message distribution
 - PostgreSQL database
 - Redis in-memory database
 - Sidekiq background processing
-- AWS S3 for assets
-- Logentries for logging
-- SafeCharge for payments 
-- Mailjet for mails
+- Rails event store gem for storing events
 
-< Architecture overview C4 model here - provided soon >
-
-## Commands
-
-The list of custom tasks/commands/scripts that could be run within application 
-
+## Commands for setup
+- Make sure the crypto_socket_client is in the same folder with current app.
+#### Then run
 ```ruby
-rake app:warmup_orders_cache
-rake app:warmup_products_cache
-rake app:warmup_cache
+bundle install
+rails db:setup
 ```
-
-## Development environment
-
-Steps to run application locally.  
-Script that automates development setup would be a huge plus!
 
 #### Automated setup
 
 ```
-# rails app
-
-$ bin/setup
-Check PostgreSQL - done 
-Check Redis - done 
-Check Sidekiq - done 
-
+# foreman start
+....
+....
+....
 Application is ready!
 ```
 
 #### Manual setup
 
-1. Install ruby/python/js whatever
+1. Install ruby
 1. Install PostgreSQL
-1. Install Redis
-1. Install something specific for your project
-
-#### Automated boot
-
-```
-# just an example
-
-$ bin/local-up
-Starting PostgreSQL...
-Starting Redis...
-Starting Dream app..
-
-Application is up and running!
-
-```
+1. Install RabbitMQ
 
 #### Manual boot
 
 1. Run PostgreSQL in background
-1. `$ redis-server`
+1. `$ rebbit-server`
 1. `$ rails s`
-
+1. `$ WORKERS=Rabbit::Consumers::Crypto rake sneakers:run`
+1. `$ ruby socket_client.rb`
 
 ## Test environment
-
-How to run tests, linters, etc.
 
 - Linter `$ rubocop`
 - Test suit `$ rspec`

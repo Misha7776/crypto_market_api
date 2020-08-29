@@ -38,7 +38,8 @@ class CurrenciesController < ApplicationController
   end
 
   def currency_update_params
-    params.require(:currency).permit(:name, :symbol).merge!(id: @currency.id)
+    params.require(:currency).permit(:name, :symbol, :bid, :ask, :seq_no, :symbol, :exchange_status, :traded_at)
+      .merge!(id: @currency.id)
   end
 
   def error_messages(error)
