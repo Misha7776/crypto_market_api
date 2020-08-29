@@ -1,8 +1,20 @@
 module CommandHandlers
   module Currencies
-    class CreateCurrency
-      def call(command)
-        entity_data = {
+    class CreateCurrency < CommandHandlers::Currencies::Base
+      def call
+        create_currency_event_store
+      end
+
+      private
+
+      def create_currency_event_store
+        Repositories::CurrencyRepo.new.with_entity(command.id) do |currency|
+          currency.create(params)
+        end
+      end
+
+      def record_params(command)
+        {
           name: command.name,
           seq_no: command.seq_no,
           symbol: command.symbol,
@@ -11,11 +23,7 @@ module CommandHandlers
           bid: command.bid,
           trade: command.trade,
           traded_at: command.traded_at
-        }.reject{ |_, v| v.nil? }
-
-        Repositories::CurrencyRepo.new.with_entity(command.id) do |entity|
-          entity.create(entity_data)
-        end
+        }.reject { |_, v| v.nil? }
       end
     end
   end

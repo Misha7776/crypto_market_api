@@ -1,5 +1,5 @@
 class CurrenciesController < ApplicationController
-  before_action :set_currency, only: [:show, :update, :destroy]
+  before_action :set_currency, only: %i[show update destroy]
 
   def index
     collection_response(Currency.all.page(params[:page]))
@@ -10,15 +10,21 @@ class CurrenciesController < ApplicationController
   end
 
   def create
-    execute(Commands::Currencies::CreateCurrency.new(currency_params))
+    render_json execute(Commands::Currencies::CreateCurrency.new(currency_params))
+  rescue Commands::ValidationError => e
+    render_json({ errors: error_messages(e) }, :bad_request)
   end
 
   def update
-    execute(Commands::Currencies::UpdateCurrency.new(Mappers::CurrencyMapper.call(params)))
+    render_json execute(Commands::Currencies::UpdateCurrency.new(currency_update_params))
+  rescue Commands::ValidationError => e
+    render_json({ errors: error_messages(e) }, :bad_request)
   end
 
   def destroy
-    execute(Commands::Currencies::DeleteCurrency.new(id: @currency.id))
+    render_json execute(Commands::Currencies::DeleteCurrency.new(id: @currency.id))
+  rescue StandardError => e
+    render_json({ errors: error_messages(e) }, 500)
   end
 
   private
@@ -29,5 +35,13 @@ class CurrenciesController < ApplicationController
 
   def currency_params
     params.require(:currency).permit(:name, :symbol)
+  end
+
+  def currency_update_params
+    params.require(:currency).permit(:name, :symbol).merge!(id: @currency.id)
+  end
+
+  def error_messages(error)
+    error&.message
   end
 end

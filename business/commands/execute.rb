@@ -9,9 +9,10 @@ module Commands
 
     def handler_for(command)
       {
-        Commands::Currencies::CreateCurrency => CommandHandlers::Currencies::CreateCurrency.new,
-        Commands::Currencies::UpdateCurrency => CommandHandlers::Currencies::UpdateCurrency.new,
-        Commands::Currencies::DeleteCurrency => CommandHandlers::Currencies::DeleteCurrency.new
+        Commands::Currencies::CreateCurrency => CommandHandlers::Currencies::CreateCurrency,
+        Commands::Currencies::UpdateCurrency => CommandHandlers::Currencies::UpdateCurrency,
+        Commands::Currencies::DeleteCurrency => CommandHandlers::Currencies::DeleteCurrency,
+        Commands::Currencies::ExternalUpdateCurrency => CommandHandlers::Currencies::UpdateCurrency
       }.fetch(command.class)
     end
   end

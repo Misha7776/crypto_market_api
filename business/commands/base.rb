@@ -4,7 +4,7 @@ module Commands
     include ActiveModel::Validations
     include ActiveModel::Conversion
 
-    def initialize(attributes={})
+    def initialize(attributes = {})
       super
     end
 

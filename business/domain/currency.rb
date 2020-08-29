@@ -35,14 +35,9 @@ module Domain
     end
 
     def currency_attributes(event)
-      @name = event.data[:name]
-      @seq_no = event.data[:seq_no]
-      @symbol = event.data[:symbol]
-      @exchange_status = event.data[:exchange_status]
-      @ask = event.data[:ask]
-      @bid = event.data[:bid]
-      @trade = event.data[:trade]
-      @traded_at = event.data[:traded_at]
+      event.data.each do |name, value|
+        instance_variable_set("@#{name}", value)
+      end
     end
   end
 end

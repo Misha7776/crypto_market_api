@@ -20,7 +20,7 @@ class BaseForm
 
     # automatically validates all REQUIRED_ATTRIBUTES
     self.class.class_eval do
-      validates *self::REQUIRED_ATTRIBUTES, presence: true if self::REQUIRED_ATTRIBUTES.present?
+      validates(*self::REQUIRED_ATTRIBUTES, presence: true) if self::REQUIRED_ATTRIBUTES.present?
     end
 
     super(@params)

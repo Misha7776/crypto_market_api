@@ -2,8 +2,16 @@ module Serialization
   def record_response(record, *args)
     options = args.extract_options!
     options[:serialize_class] ||= "#{record.class.name}Serializer".constantize
+    hash = serialize_record(record, options)
 
-    render_json(serialize_record(record, options), options[:status] || :ok)
+    status = if record.errors.none?
+               options[:status] || :ok
+             else
+               hash[:errors] = record.errors.messages
+               :bad_request
+             end
+
+    render_json(hash, status)
   end
 
   def collection_response(collection, *args)

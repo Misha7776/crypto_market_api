@@ -16,8 +16,8 @@ module Mappers
     def call
       return if @data.blank?
 
-      get_currency
-      @params = map_currency_params
+      fetch_currency
+      map_currency_params
       Xlog.info("Parsed params: #{params}")
       currency.present? ? update_currency : create_currency
     end
@@ -26,19 +26,19 @@ module Mappers
 
     attr_reader :data, :currency, :params
 
-    def get_currency
+    def fetch_currency
       @currency = Currency.find_by(symbol: @data['symbol'])
     end
 
     def map_currency_params
-      { name: data['name'],
-        seq_no: data['seqNo'],
-        symbol: data['symbol'],
-        exchange_status: data['exchangeStatus'],
-        ask: data['ask'],
-        bid: data['bid'],
-        trade: data['trade'],
-        traded_at: traded_at }
+      @params = { name: data['name'],
+                  seq_no: data['seqNo'],
+                  symbol: data['symbol'],
+                  exchange_status: data['exchangeStatus'],
+                  ask: data['ask'],
+                  bid: data['bid'],
+                  trade: data['trade'],
+                  traded_at: traded_at }
     end
 
     def traded_at
@@ -46,7 +46,7 @@ module Mappers
     end
 
     def update_currency
-      execute(::Commands::Currencies::UpdateCurrency.new(params.merge!(id: currency.id)))
+      execute(::Commands::Currencies::ExternalUpdateCurrency.new(params.merge!(id: currency.id)))
     end
 
     def create_currency
