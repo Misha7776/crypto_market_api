@@ -1,5 +1,5 @@
 Sneakers.configure(
-  amqp: RCreds.fetch(:rabbitmq_uri),
+  amqp: ENV.fetch('RABBIT_URL', RCreds.fetch(:rabbitmq_uri)),
   exchange: :default,
   exchange_type: :direct,
   workers: 1,

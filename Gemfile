@@ -3,8 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
-gem 'api-pagination'
-gem 'apitome'
 gem 'blueprinter'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise-jwt'
@@ -18,7 +16,6 @@ gem 'rails', '~> 6.0.0'
 gem 'rails_event_store'
 gem 'r_creds'
 gem 'redis'
-gem 'rspec_api_documentation'
 gem 'sidekiq'
 gem 'xlog'
 
