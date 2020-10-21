@@ -66,10 +66,6 @@ GEM
     aggregate_root (1.1.1)
       ruby_event_store (= 1.1.1)
     amq-protocol (2.3.2)
-    api-pagination (4.8.2)
-    apitome (0.3.0)
-      kramdown
-      railties
     arkency-command_bus (0.4.0)
       thread_safe
     ast (2.4.1)
@@ -77,7 +73,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    bcrypt (3.1.15)
+    bcrypt (3.1.16)
     bigdecimal (2.0.0)
     blueprinter (0.25.1)
     bootsnap (1.4.8)
@@ -102,7 +98,7 @@ GEM
     database_cleaner (1.8.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.7.2)
+    devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -167,8 +163,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kramdown (2.3.0)
-      rexml
     kwalify (0.7.2)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -189,7 +183,6 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     msgpack (1.3.3)
-    mustache (1.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.2)
@@ -304,10 +297,6 @@ GEM
       rspec-core (~> 3.0, >= 3.0.0)
       sidekiq (>= 2.4.0)
     rspec-support (3.9.3)
-    rspec_api_documentation (6.1.0)
-      activesupport (>= 3.0.0)
-      mustache (~> 1.0, >= 0.99.4)
-      rspec (~> 3.0)
     rubocop (0.89.1)
       parallel (~> 1.10)
       parser (>= 2.7.1.1)
@@ -388,8 +377,8 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
-    warden (1.2.8)
-      rack (>= 2.0.6)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     warden-jwt_auth (0.5.0)
       dry-auto_inject (~> 0.6)
       dry-configurable (~> 0.9)
@@ -410,8 +399,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_doctor
-  api-pagination
-  apitome
   blueprinter
   bootsnap (>= 1.4.2)
   brakeman
@@ -440,7 +427,6 @@ DEPENDENCIES
   redis
   rspec-rails (~> 4.0, >= 4.0.1)
   rspec-sidekiq
-  rspec_api_documentation
   rubocop
   rubycritic
   sidekiq
